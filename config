@@ -42,7 +42,7 @@ USE-ZSH = true
 #########################
 # Secrets configuration #
 #########################
-HOST_SSH_DIR = "$(HOME)/.ssh"
+HOST_SSH_DIR = "$(HOME)/.ssh/google_cloud"
 CONTAINER_SSH_DIR = "/home/$(USER)/.ssh"
-HOST_SECRETS_DIR = "$(HOME)/.secrets"
+HOST_SECRETS_DIR = "$(HOME)/.secrets/google_cloud"
 CONTAINER_SECRETS_DIR = "/home/$(USER)/.secrets"

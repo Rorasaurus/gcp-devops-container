@@ -62,6 +62,7 @@ build:
 		--build-arg packages=$(PACKAGES) \
 		--build-arg usezsh=$(USE-ZSH) \
 		--build-arg entry=$(ENTRY) \
+        --build-arg container_secrets=$(CONTAINER_SECRETS_DIR) \
 		-t $(IMAGE) .
 	@$(RUNTIME) run --init -it --name $(CONTAINER) --hostname=$(CONTAINER) \
 		-e "TERM=xterm-256color" \

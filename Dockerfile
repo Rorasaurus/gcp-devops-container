@@ -45,7 +45,14 @@ RUN if [ "$usezsh" == "true" ]; then sudo dnf install -y zsh util-linux-user; sh
 # Google Cloud CLI
 USER $user
 ARG gcloudv
-RUN if [ ! "${gcloudv}" == "disabled" ]; then curl https://sdk.cloud.google.com > ~/install.sh && chmod +x ~/install.sh && bash ~/install.sh --disable-prompts --install-dir=~/; if [ "$usezsh" == "true" ]; then echo "source ~/google-cloud-sdk/path.zsh.inc" >> ~/.zshrc && echo "source ~/google-cloud-sdk/completion.zsh.inc" >> ~/.zshrc; else echo "source ~/google-cloud-sdk/path.bash.inc" >> ~/.zshrc && echo "source ~/google-cloud-sdk/completion.bash.inc" >> ~/.zshrc; fi; fi
+RUN curl https://sdk.cloud.google.com > ~/install.sh && \
+    chmod +x ~/install.sh && \
+    bash ~/install.sh --disable-prompts --install-dir=~/ && \
+    if [ "$usezsh" == "true" ]; then echo "source ~/google-cloud-sdk/path.zsh.inc" >> ~/.zshrc && echo "source ~/google-cloud-sdk/completion.zsh.inc" >> ~/.zshrc; else echo "source ~/google-cloud-sdk/path.bash.inc" >> ~/.zshrc && echo "source ~/google-cloud-sdk/completion.bash.inc" >> ~/.zshrc; fi
+
+# Google Cloud Credentials
+ARG container_secrets
+ENV GOOGLE_APPLICATION_CREDENTIALS=${container_secrets}/credentials.json
 
 # Configure working directory based upon Dockerfile directory name.
 WORKDIR /home/$user/$app
