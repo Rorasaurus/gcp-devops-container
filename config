@@ -2,7 +2,7 @@
 # Fedora configuration #
 ########################
 # FEDORA = 32                           <--- Define Fedora version
-FEDORA = 33
+FEDORA = 34
 
 ####################
 # Docker vs Podman #
@@ -17,7 +17,7 @@ DOCKER = false
 # TERRAFORM = disabled                  <--- Disable Terraform
 # TERRAFORM = 0.14.0                    <--- Define Terraform version
 # TERRAFORM = latest                    <--- Install latest Terraform
-TERRAFORM = latest
+TERRAFORM = 1.0.7-1
 
 ########################
 # Packer configuration #
@@ -25,7 +25,7 @@ TERRAFORM = latest
 # PACKER = disabled                     <--- Disable Packer
 # PACKER = 1.6.0                        <--- Define Packer version
 # TERRAFORM = latest                    <--- Install latest Packer
-PACKER = latest
+PACKER = disabled
 
 #########################
 # Ansible configuration #
@@ -38,7 +38,12 @@ ANSIBLE = latest
 ################
 # DNF packages #
 ################
-PACKAGES = "vim git python3 python3-devel python3-pip wget htop curl unzip sudo iputils"
+PACKAGES = "vim git python3 python3-devel python3-pip wget htop curl unzip sudo iputils make"
+
+####################
+# Python3 Packages #
+####################
+PIP3 = "jinja2 google-api-python-client oauth2client"
 
 #######################
 # Shell configuration #
@@ -50,8 +55,9 @@ USE-ZSH = true
 #########################
 # Secrets configuration #
 #########################
-HOST_SSH_DIR = "$(HOME)/.ssh/gcp"
+HOST_SSH_DIR = "$(HOME)/.ssh/shirenet"
 CONTAINER_SSH_DIR = "/home/$(USER)/.ssh"
-HOST_SECRETS_DIR = "$(HOME)/.secrets/gcp"
+HOST_SECRETS_DIR = "$(HOME)/.secrets/shirenet/gcloud"
 CONTAINER_SECRETS_DIR = "/home/$(USER)/.secrets"
 GCP_SECRETS_FILE = "credentials.json"
+ANSIBLE_SECRETS_FILE = ".vaultpw"
