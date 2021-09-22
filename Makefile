@@ -3,7 +3,9 @@ include config
 # Container variables
 CURR_DIR:=$(dir $(realpath $(lastword $(MAKEFILE_LIST))))
 APP_DIR:=$(realpath $(CURR_PATH)../)
-APP:=$(notdir $(APP_DIR))
+APP_PRE:=$(notdir $(APP_DIR))
+APP:=$(shell echo $(APP_PRE) | tr A-Z a-z)
+# APP:=$(call lc,$(APP_PRE))
 IMAGE = "$(APP)"
 CONTAINER = "$(APP)-container"
 USER = $(shell whoami)
@@ -207,3 +209,4 @@ start:
 print-vars:
 	-@echo $(ENTRY)
 	-@echo $(PACKAGES)
+	-@echo $(APP)
